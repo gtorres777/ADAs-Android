@@ -25,8 +25,8 @@ import org.json.JSONException;
 public class MainActivity extends AppCompatActivity {
 
     EditText txtUsuario,txtClave;
-    TextView estado;
-    Button btnLogear, btnRegistrar,btnSalir;
+    TextView lblEstado;
+    Button btnLogear, btnSalir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +40,11 @@ public class MainActivity extends AppCompatActivity {
         txtClave=findViewById(R.id.txtClave);
         btnLogear=findViewById(R.id.btnLogear);
         btnSalir=findViewById(R.id.btnSalir);
-        estado = findViewById(R.id.estado);
+        lblEstado = findViewById(R.id.lblEstado);
     }
 
     //Peticion de post actualizar datos en 0 y 1     http://192.168.1.12:8000/token/?temperatura=200&humedad=100
-
-
+    //Inicio del codigo antiguo de juan y edagardo
     public void Logear(View v){
         AsyncTask.execute(new Runnable() {
             @Override
@@ -94,9 +93,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-
-
     public void enviarDatos(View v){
         AsyncTask.execute(new Runnable() {
             @Override
@@ -120,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                                         //Intent llamar = new Intent(getApplicationContext(),MostrarDatos.class);
                                         //startActivity(llamar);
                                         //finish();
-                                        estado.setText("subiendo...");
+                                        lblEstado.setText("subiendo...");
                                         Toast.makeText(getApplicationContext(),"Su mensaje fue enviado con exito",
                                                 Toast.LENGTH_LONG).show();
 
@@ -146,20 +142,15 @@ public class MainActivity extends AppCompatActivity {
             };
         });
     }
+    //Fin del codigo antiguo de juan y edagardo
 
-
-
-    public void avanzar(View v){
+    // Funcion para que el robot se pare
+    public void accionParar(View v){
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                String dato1 = "1";
-                String dato2 = "0";
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                //String url ="http://192.168.1.12:8000/datos";
-                String url ="http://192.168.1.131:8000/accion/?";
-                url = url + "accion=pararse";
-
+                String url ="http://192.168.1.131:8000/accion/?accion=pararse";
                 JsonArrayRequest stringRequest = new JsonArrayRequest(url,
                         new Response.Listener<JSONArray>() {
                             @Override
@@ -168,16 +159,10 @@ public class MainActivity extends AppCompatActivity {
                                     String valor = response.getJSONObject(0).getString("Mensaje");
                                     Log.i(valor,valor);
                                     if(valor.equals("Update Success")){
-
-                                        //Intent llamar = new Intent(getApplicationContext(),MostrarDatos.class);
-                                        //startActivity(llamar);
-                                        //finish();
-                                        estado.setText("avanzando...");
-                                        Toast.makeText(getApplicationContext(),"Avanzar fue enviado con exito",
-                                                Toast.LENGTH_LONG).show();
-
+                                        lblEstado.setText("Estado: Parado");
+                                        //Toast.makeText(getApplicationContext(),"Avanzar fue enviado con exito", Toast.LENGTH_LONG).show();
                                     }else{
-                                        Toast.makeText(getApplicationContext(),"Credenciales invalidas",
+                                        Toast.makeText(getApplicationContext(),"No fue enviada la acción correctamente",
                                                 Toast.LENGTH_LONG).show();
                                     }
                                 } catch (JSONException e) {
@@ -199,19 +184,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-
-    public void retroceder(View v){
+    // Funcion para que el robot se siente
+    public void accionSentar(View v){
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                String dato1 = "0";
-                String dato2 = "1";
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                //String url ="http://192.168.1.12:8000/datos";
-                String url ="http://192.168.1.131:8000/accion/?";
-                url = url + "accion=sentarse";
-
+                String url ="http://192.168.1.131:8000/accion/?accion=sentarse";
                 JsonArrayRequest stringRequest = new JsonArrayRequest(url,
                         new Response.Listener<JSONArray>() {
                             @Override
@@ -220,16 +199,10 @@ public class MainActivity extends AppCompatActivity {
                                     String valor = response.getJSONObject(0).getString("Mensaje");
                                     Log.i(valor,valor);
                                     if(valor.equals("Update Success")){
-
-                                        //Intent llamar = new Intent(getApplicationContext(),MostrarDatos.class);
-                                        //startActivity(llamar);
-                                        //finish();
-                                        estado.setText("Retrocediendo...");
-                                        Toast.makeText(getApplicationContext(),"Retroceder fue enviado con exito",
-                                                Toast.LENGTH_LONG).show();
-
+                                        lblEstado.setText("Estado: Sentado");
+                                        //Toast.makeText(getApplicationContext(),"Retroceder fue enviado con exito", Toast.LENGTH_LONG).show();
                                     }else{
-                                        Toast.makeText(getApplicationContext(),"Credenciales invalidas",
+                                        Toast.makeText(getApplicationContext(),"No fue enviada la acción correctamente",
                                                 Toast.LENGTH_LONG).show();
                                     }
                                 } catch (JSONException e) {
@@ -251,4 +224,243 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // Funcion para que el robot avance
+    public void accionAvanzar(View v){
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                String url ="http://192.168.1.131:8000/accion/?accion=avanzar";
+                JsonArrayRequest stringRequest = new JsonArrayRequest(url,
+                        new Response.Listener<JSONArray>() {
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                try {
+                                    String valor = response.getJSONObject(0).getString("Mensaje");
+                                    Log.i(valor,valor);
+                                    if(valor.equals("Update Success")){
+                                        lblEstado.setText("Estado: Avanzando...");
+                                        //Toast.makeText(getApplicationContext(),"Retroceder fue enviado con exito", Toast.LENGTH_LONG).show();
+                                    }else{
+                                        Toast.makeText(getApplicationContext(),"No fue enviada la acción correctamente",
+                                                Toast.LENGTH_LONG).show();
+                                    }
+                                } catch (JSONException e) {
+                                    Toast.makeText(getApplicationContext(),
+                                            "Error en la data recibida",
+                                            Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(),
+                                "Compruebe que tiene acceso a internet",
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+                queue.add(stringRequest);
+            };
+        });
+    }
+
+    // Funcion para que el robot retroceda
+    public void accionRetroceder(View v){
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                String url ="http://192.168.1.131:8000/accion/?accion=retroceder";
+                JsonArrayRequest stringRequest = new JsonArrayRequest(url,
+                        new Response.Listener<JSONArray>() {
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                try {
+                                    String valor = response.getJSONObject(0).getString("Mensaje");
+                                    Log.i(valor,valor);
+                                    if(valor.equals("Update Success")){
+                                        lblEstado.setText("Estado: Retrocediendo...");
+                                        //Toast.makeText(getApplicationContext(),"Retroceder fue enviado con exito", Toast.LENGTH_LONG).show();
+                                    }else{
+                                        Toast.makeText(getApplicationContext(),"No fue enviada la acción correctamente",
+                                                Toast.LENGTH_LONG).show();
+                                    }
+                                } catch (JSONException e) {
+                                    Toast.makeText(getApplicationContext(),
+                                            "Error en la data recibida",
+                                            Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(),
+                                "Compruebe que tiene acceso a internet",
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+                queue.add(stringRequest);
+            };
+        });
+    }
+
+    // Funcion para que el robot gire a la izquierda
+    public void accionGirarIzquierda(View v){
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                String url ="http://192.168.1.131:8000/accion/?accion=girarIzquierda";
+                JsonArrayRequest stringRequest = new JsonArrayRequest(url,
+                        new Response.Listener<JSONArray>() {
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                try {
+                                    String valor = response.getJSONObject(0).getString("Mensaje");
+                                    Log.i(valor,valor);
+                                    if(valor.equals("Update Success")){
+                                        lblEstado.setText("Estado: Girando...");
+                                        //Toast.makeText(getApplicationContext(),"Retroceder fue enviado con exito", Toast.LENGTH_LONG).show();
+                                    }else{
+                                        Toast.makeText(getApplicationContext(),"No fue enviada la acción correctamente",
+                                                Toast.LENGTH_LONG).show();
+                                    }
+                                } catch (JSONException e) {
+                                    Toast.makeText(getApplicationContext(),
+                                            "Error en la data recibida",
+                                            Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(),
+                                "Compruebe que tiene acceso a internet",
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+                queue.add(stringRequest);
+            };
+        });
+    }
+
+    // Funcion para que el robot gire a la derecha
+    public void accionGirarDerecha(View v){
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                String url ="http://192.168.1.131:8000/accion/?accion=girarDerecha";
+                JsonArrayRequest stringRequest = new JsonArrayRequest(url,
+                        new Response.Listener<JSONArray>() {
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                try {
+                                    String valor = response.getJSONObject(0).getString("Mensaje");
+                                    Log.i(valor,valor);
+                                    if(valor.equals("Update Success")){
+                                        lblEstado.setText("Estado: Girando...");
+                                        //Toast.makeText(getApplicationContext(),"Retroceder fue enviado con exito", Toast.LENGTH_LONG).show();
+                                    }else{
+                                        Toast.makeText(getApplicationContext(),"No fue enviada la acción correctamente",
+                                                Toast.LENGTH_LONG).show();
+                                    }
+                                } catch (JSONException e) {
+                                    Toast.makeText(getApplicationContext(),
+                                            "Error en la data recibida",
+                                            Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(),
+                                "Compruebe que tiene acceso a internet",
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+                queue.add(stringRequest);
+            };
+        });
+    }
+
+    // Funcion para que el robot salude
+    public void accionSaludar(View v){
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                String url ="http://192.168.1.131:8000/accion/?accion=saludar";
+                JsonArrayRequest stringRequest = new JsonArrayRequest(url,
+                        new Response.Listener<JSONArray>() {
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                try {
+                                    String valor = response.getJSONObject(0).getString("Mensaje");
+                                    Log.i(valor,valor);
+                                    if(valor.equals("Update Success")){
+                                        lblEstado.setText("Estado: Saludando...");
+                                        //Toast.makeText(getApplicationContext(),"Retroceder fue enviado con exito", Toast.LENGTH_LONG).show();
+                                    }else{
+                                        Toast.makeText(getApplicationContext(),"No fue enviada la acción correctamente",
+                                                Toast.LENGTH_LONG).show();
+                                    }
+                                } catch (JSONException e) {
+                                    Toast.makeText(getApplicationContext(),
+                                            "Error en la data recibida",
+                                            Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(),
+                                "Compruebe que tiene acceso a internet",
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+                queue.add(stringRequest);
+            };
+        });
+    }
+
+    // Funcion para que el robot baile
+    public void accionBailar(View v){
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                String url ="http://192.168.1.131:8000/accion/?accion=bailar";
+                JsonArrayRequest stringRequest = new JsonArrayRequest(url,
+                        new Response.Listener<JSONArray>() {
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                try {
+                                    String valor = response.getJSONObject(0).getString("Mensaje");
+                                    Log.i(valor,valor);
+                                    if(valor.equals("Update Success")){
+                                        lblEstado.setText("Estado: Bailando...");
+                                        //Toast.makeText(getApplicationContext(),"Retroceder fue enviado con exito", Toast.LENGTH_LONG).show();
+                                    }else{
+                                        Toast.makeText(getApplicationContext(),"No fue enviada la acción correctamente",
+                                                Toast.LENGTH_LONG).show();
+                                    }
+                                } catch (JSONException e) {
+                                    Toast.makeText(getApplicationContext(),
+                                            "Error en la data recibida",
+                                            Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(),
+                                "Compruebe que tiene acceso a internet",
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+                queue.add(stringRequest);
+            };
+        });
+    }
 }
