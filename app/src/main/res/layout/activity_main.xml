@@ -1,120 +1,253 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    >
 
-    <TextView
-        android:id="@+id/textView"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/background_dark"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/f2" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CE000000"
         android:gravity="center"
-        android:text="USUARIO"
-        android:textColor="@android:color/background_light" />
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/txtUsuario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName" />
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:paddingTop="20dp"
+            android:paddingBottom="15dp"
+            android:text="CONTROL"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:textStyle="bold|italic" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/background_dark"
-        android:gravity="center"
-        android:text="CLAVE"
-        android:textColor="@android:color/background_light" />
-
-    <EditText
-        android:id="@+id/txtClave"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName" />
-
-    <Button
-        android:id="@+id/btnLogear"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:onClick="Logear"
-        android:text="Recibir Datos" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="#00000000"
+            android:gravity="center"
+            android:orientation="horizontal">
 
 
-    <Button
-        android:id="@+id/btnSalir"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:onClick="enviarDatos"
-        android:text="Enviar Datos API" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:gravity="center"
+                android:paddingRight="10dp"
+                android:text="TEMPERATURA"
+                android:textColor="@android:color/background_light"
+                android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/btnPararse"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="accionParar"
-        android:text="Pararse" />
+            <TextView
+                android:id="@+id/txtUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/input"
+                android:ems="5"
+                android:gravity="center"
+                android:inputType="textPersonName"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:text="1111"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/btnSentarse"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="accionSentar"
-        android:text="Sentarse" />
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/btnAvanzar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="accionAvanzar"
-        android:text="Avanzar" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="#00000000"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="10dp">
 
-    <Button
-        android:id="@+id/btnRetroceder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="accionRetroceder"
-        android:text="Retroceder" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
 
-    <Button
-        android:id="@+id/btnGirarIzquierda"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="accionGirarIzquierda"
-        android:text="Girar Izquierda" />
+                android:background="#00000000"
+                android:gravity="center"
+                android:paddingRight="10dp"
+                android:text="HUMEDAD"
+                android:textColor="@android:color/background_light"
+                android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/btnGirarDerecha"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="accionGirarDerecha"
-        android:text="Girar Derecha" />
+            <TextView
+                android:id="@+id/txtClave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-    <Button
-        android:id="@+id/btnSaludar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="accionSaludar"
-        android:text="Saludar" />
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/input"
+                android:ems="5"
+                android:gravity="center"
+                android:inputType="textPersonName"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:text="1111"
+                android:textColor="#FC000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/btnBailar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="accionBailar"
-        android:text="Bailar" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/lblEstado"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Estado: Estado Inicial" />
-</LinearLayout>
+
+        <Button
+            android:id="@+id/btnSalir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:onClick="enviar"
+            android:text="Enviar Datos API" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#00000000"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="#00000000"
+
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnPararse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/press_button2"
+                    android:drawableStart="@drawable/up"
+                    android:gravity="center"
+                    android:onClick="accionParar"
+                    android:paddingLeft="28dp" />
+
+                <Button
+                    android:id="@+id/btnAvanzar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/press_button"
+                    android:drawableLeft="@drawable/a2"
+                    android:onClick="accionAvanzar"
+                    android:padding="30dp"
+
+                    />
+
+
+                <Button
+                    android:id="@+id/btnSentarse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/press_button2"
+                    android:drawableLeft="@drawable/sit"
+                    android:onClick="accionSentar"
+                    android:paddingLeft="28dp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="#00000000"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnGirarIzquierda"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="40dp"
+                    android:background="@drawable/press_button"
+                    android:drawableLeft="@drawable/a1"
+                    android:onClick="accionGirarIzquierda"
+                    android:padding="30dp" />
+
+
+                <Button
+                    android:id="@+id/btnGirarDerecha"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:background="@drawable/press_button"
+                    android:drawableLeft="@drawable/a3"
+                    android:onClick="accionGirarDerecha"
+                    android:padding="30dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="#00000000"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnSaludar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/press_button2"
+                    android:drawableStart="@drawable/h1"
+                    android:onClick="accionSaludar"
+
+                    android:paddingLeft="28dp" />
+
+                <Button
+                    android:id="@+id/btnRetroceder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/press_button"
+                    android:drawableLeft="@drawable/a4"
+                    android:onClick="accionRetroceder"
+                    android:padding="30dp" />
+
+                <Button
+                    android:id="@+id/btnBailar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/press_button2"
+                    android:drawableLeft="@drawable/dan"
+                    android:onClick="accionBailar"
+                    android:paddingLeft="28dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/lblEstado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Estado: Estado Inicial" />
+    </LinearLayout>
+
+</RelativeLayout>

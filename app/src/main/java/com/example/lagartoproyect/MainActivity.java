@@ -22,9 +22,18 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+
 public class MainActivity extends AppCompatActivity {
 
-    EditText txtUsuario,txtClave;
+    TextView txtUsuario,txtClave;
     TextView lblEstado;
     Button btnLogear, btnSalir;
 
@@ -38,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         txtUsuario = findViewById(R.id.txtUsuario);
         txtClave=findViewById(R.id.txtClave);
-        btnLogear=findViewById(R.id.btnLogear);
+
         btnSalir=findViewById(R.id.btnSalir);
         lblEstado = findViewById(R.id.lblEstado);
     }
@@ -463,4 +472,73 @@ public class MainActivity extends AppCompatActivity {
             };
         });
     }
+    public void enviar(View view){
+        this.doInBackground("http://192.168.1.131:8000/o/token/?","password","kozak","totodiletux999","nl1hQDOjoTodris2ooxifflEATQSOk0lU5cCO2mV","u0JOw7C0GWWXyS8MCmeIL9r7vpuw0OzkkVjfByyvq6FCKh3XSIW5MpB3WjKsOkuA9nssmnRy7BjHTY2oij69zRYh4FW15nBXQVlKiklrFVoLo8hBRKpvNEgd09mz3LXz");
+
+    }
+
+
+
+    protected String doInBackground(String... params) {
+
+        String urlString = params[0];
+        String grant_type = params[1];
+        String username = params[2];
+        String password = params[3];
+        String client_id = params[4];
+        String client_secret = params[5];
+        URL url = null;
+        InputStream stream = null;
+        HttpURLConnection urlConnection = null;
+        try {
+            url = new URL(urlString);
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setDoOutput(true);
+
+            String data = URLEncoder.encode("grant_type", "UTF-8")
+                    + "=" + URLEncoder.encode(grant_type, "UTF-8");
+
+            data += "&" + URLEncoder.encode("username", "UTF-8") + "="
+                    + URLEncoder.encode(username, "UTF-8");
+
+            data += "&" + URLEncoder.encode("password", "UTF-8") + "="
+                    + URLEncoder.encode(password, "UTF-8");
+
+            data += "&" + URLEncoder.encode("client_id", "UTF-8") + "="
+                    + URLEncoder.encode(client_id, "UTF-8");
+
+            data += "&" + URLEncoder.encode("client_secret", "UTF-8") + "="
+                    + URLEncoder.encode(client_secret, "UTF-8");
+
+            urlConnection.connect();
+
+            OutputStreamWriter wr = new OutputStreamWriter(urlConnection.getOutputStream());
+            wr.write(data);
+            wr.flush();
+
+            stream = urlConnection.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"), 8);
+            String result = reader.readLine();
+            return result;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+        }
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            Log.i("Result", "SLEEP ERROR");
+        }
+        return null;
+    }
+
 }
+
+
