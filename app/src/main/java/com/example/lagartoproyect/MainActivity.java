@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
@@ -36,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
     TextView txtUsuario,txtClave;
     TextView lblEstado;
     Button btnLogear, btnSalir;
+    Handler handler = new Handler();
+    final int TIEMPO = 1100;
+    String ultimaAccion = "Sentarse";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,38 +54,39 @@ public class MainActivity extends AppCompatActivity {
 
         btnSalir=findViewById(R.id.btnSalir);
         lblEstado = findViewById(R.id.lblEstado);
+
+        mostrarDatosHandler();
     }
 
-    //Peticion de post actualizar datos en 0 y 1     http://192.168.1.12:8000/token/?temperatura=200&humedad=100
-    //Inicio del codigo antiguo de juan y edagardo
-    public void Logear(View v){
+    public void mostrarDatosHandler() {
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                mostrarDatos();
+                handler.postDelayed(this, TIEMPO);
+            }
+
+        }, TIEMPO);
+    }
+
+    public void mostrarDatos(){
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                //String nombre = txtUsuario.getText().toString().trim();
-                //String clave = txtClave.getText().toString().trim();
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url ="http://192.168.1.131:8000/datos";
-                //String url ="http://192.168.0.27:8080/WebApp06_WebAppSistema/rest/usuarios/login?";
-                //url = url + "nombre=" + nombre + "&clave=" + clave;
-
-
+                String url ="http://tux777.pythonanywhere.com/datos/";
                 JsonArrayRequest stringRequest = new JsonArrayRequest(url,
                         new Response.Listener<JSONArray>() {
                             @Override
                             public void onResponse(JSONArray response) {
                                 try {
-                                    String valor = response.getJSONObject(0).getString("id");
-                                    Log.i(valor,valor);
-                                    if(valor.equals("1")){
-
-                                        Intent llamar = new Intent(getApplicationContext(),MostrarDatos.class);
-                                        startActivity(llamar);
-                                        finish();
-
+                                    String valorTemperatura = response.getJSONObject(0).getString("temperatura");
+                                    String valorHumedad = response.getJSONObject(0).getString("humedad");
+                                    //Log.i(valor,valor);
+                                    if(valorTemperatura.equals("") && valorHumedad.equals("")){
+                                        //wasa;
                                     }else{
-                                        Toast.makeText(getApplicationContext(),"Credenciales invalidas",
-                                                Toast.LENGTH_LONG).show();
+                                        txtUsuario.setText(valorTemperatura);
+                                        txtClave.setText(valorHumedad);
                                     }
                                 } catch (JSONException e) {
                                     Toast.makeText(getApplicationContext(),
@@ -102,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //Peticion de post actualizar datos en 0 y 1     http://192.168.1.12:8000/token/?temperatura=200&humedad=100
     public void enviarDatos(View v){
         AsyncTask.execute(new Runnable() {
             @Override
@@ -110,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                 String dato2 = txtClave.getText().toString().trim();
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
                 //String url ="http://192.168.1.12:8000/datos";
-                String url ="http://192.168.1.131:8000/token/?";
+                String url ="http://tux777.pythonanywhere.com/token/?";
                 url = url + "temperatura=" + dato1 + "&humedad=" + dato2;
 
                 JsonArrayRequest stringRequest = new JsonArrayRequest(url,
@@ -159,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url ="http://192.168.1.131:8000/accion/?accion=pararse";
+                String url ="http://tux777.pythonanywhere.com/accion/?accion=pararse";
                 JsonArrayRequest stringRequest = new JsonArrayRequest(url,
                         new Response.Listener<JSONArray>() {
                             @Override
@@ -169,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
                                     Log.i(valor,valor);
                                     if(valor.equals("Update Success")){
                                         lblEstado.setText("Estado: Parado");
+                                        ultimaAccion = "Pararse";
                                         //Toast.makeText(getApplicationContext(),"Avanzar fue enviado con exito", Toast.LENGTH_LONG).show();
                                     }else{
                                         Toast.makeText(getApplicationContext(),"No fue enviada la acción correctamente",
@@ -199,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url ="http://192.168.1.131:8000/accion/?accion=sentarse";
+                String url ="http://tux777.pythonanywhere.com/accion/?accion=sentarse";
                 JsonArrayRequest stringRequest = new JsonArrayRequest(url,
                         new Response.Listener<JSONArray>() {
                             @Override
@@ -209,6 +216,7 @@ public class MainActivity extends AppCompatActivity {
                                     Log.i(valor,valor);
                                     if(valor.equals("Update Success")){
                                         lblEstado.setText("Estado: Sentado");
+                                        ultimaAccion = "Sentarse";
                                         //Toast.makeText(getApplicationContext(),"Retroceder fue enviado con exito", Toast.LENGTH_LONG).show();
                                     }else{
                                         Toast.makeText(getApplicationContext(),"No fue enviada la acción correctamente",
@@ -239,7 +247,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url ="http://192.168.1.131:8000/accion/?accion=avanzar";
+                String url ="http://tux777.pythonanywhere.com/accion/?accion=avanzar";
                 JsonArrayRequest stringRequest = new JsonArrayRequest(url,
                         new Response.Listener<JSONArray>() {
                             @Override
@@ -249,6 +257,7 @@ public class MainActivity extends AppCompatActivity {
                                     Log.i(valor,valor);
                                     if(valor.equals("Update Success")){
                                         lblEstado.setText("Estado: Avanzando...");
+                                        ultimaAccion = "Avanzar";
                                         //Toast.makeText(getApplicationContext(),"Retroceder fue enviado con exito", Toast.LENGTH_LONG).show();
                                     }else{
                                         Toast.makeText(getApplicationContext(),"No fue enviada la acción correctamente",
@@ -279,7 +288,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url ="http://192.168.1.131:8000/accion/?accion=retroceder";
+                String url ="http://tux777.pythonanywhere.com/accion/?accion=retroceder";
                 JsonArrayRequest stringRequest = new JsonArrayRequest(url,
                         new Response.Listener<JSONArray>() {
                             @Override
@@ -289,6 +298,7 @@ public class MainActivity extends AppCompatActivity {
                                     Log.i(valor,valor);
                                     if(valor.equals("Update Success")){
                                         lblEstado.setText("Estado: Retrocediendo...");
+                                        ultimaAccion = "Retroceder";
                                         //Toast.makeText(getApplicationContext(),"Retroceder fue enviado con exito", Toast.LENGTH_LONG).show();
                                     }else{
                                         Toast.makeText(getApplicationContext(),"No fue enviada la acción correctamente",
@@ -319,7 +329,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url ="http://192.168.1.131:8000/accion/?accion=girarIzquierda";
+                String url ="http://tux777.pythonanywhere.com/accion/?accion=girarIzquierda";
                 JsonArrayRequest stringRequest = new JsonArrayRequest(url,
                         new Response.Listener<JSONArray>() {
                             @Override
@@ -328,7 +338,8 @@ public class MainActivity extends AppCompatActivity {
                                     String valor = response.getJSONObject(0).getString("Mensaje");
                                     Log.i(valor,valor);
                                     if(valor.equals("Update Success")){
-                                        lblEstado.setText("Estado: Girando...");
+                                        lblEstado.setText("Estado: Girando a la Izquierda...");
+                                        ultimaAccion = "Girar Izquierda";
                                         //Toast.makeText(getApplicationContext(),"Retroceder fue enviado con exito", Toast.LENGTH_LONG).show();
                                     }else{
                                         Toast.makeText(getApplicationContext(),"No fue enviada la acción correctamente",
@@ -359,7 +370,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url ="http://192.168.1.131:8000/accion/?accion=girarDerecha";
+                String url ="http://tux777.pythonanywhere.com/accion/?accion=girarDerecha";
                 JsonArrayRequest stringRequest = new JsonArrayRequest(url,
                         new Response.Listener<JSONArray>() {
                             @Override
@@ -368,7 +379,8 @@ public class MainActivity extends AppCompatActivity {
                                     String valor = response.getJSONObject(0).getString("Mensaje");
                                     Log.i(valor,valor);
                                     if(valor.equals("Update Success")){
-                                        lblEstado.setText("Estado: Girando...");
+                                        lblEstado.setText("Estado: Girando a la Derecha...");
+                                        ultimaAccion = "Girar Derecha";
                                         //Toast.makeText(getApplicationContext(),"Retroceder fue enviado con exito", Toast.LENGTH_LONG).show();
                                     }else{
                                         Toast.makeText(getApplicationContext(),"No fue enviada la acción correctamente",
@@ -399,7 +411,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url ="http://192.168.1.131:8000/accion/?accion=saludar";
+                String url ="http://tux777.pythonanywhere.com/accion/?accion=saludar";
                 JsonArrayRequest stringRequest = new JsonArrayRequest(url,
                         new Response.Listener<JSONArray>() {
                             @Override
@@ -409,6 +421,7 @@ public class MainActivity extends AppCompatActivity {
                                     Log.i(valor,valor);
                                     if(valor.equals("Update Success")){
                                         lblEstado.setText("Estado: Saludando...");
+                                        ultimaAccion = "Saludar";
                                         //Toast.makeText(getApplicationContext(),"Retroceder fue enviado con exito", Toast.LENGTH_LONG).show();
                                     }else{
                                         Toast.makeText(getApplicationContext(),"No fue enviada la acción correctamente",
@@ -439,7 +452,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url ="http://192.168.1.131:8000/accion/?accion=bailar";
+                String url ="http://tux777.pythonanywhere.com/accion/?accion=bailar";
                 JsonArrayRequest stringRequest = new JsonArrayRequest(url,
                         new Response.Listener<JSONArray>() {
                             @Override
@@ -449,6 +462,7 @@ public class MainActivity extends AppCompatActivity {
                                     Log.i(valor,valor);
                                     if(valor.equals("Update Success")){
                                         lblEstado.setText("Estado: Bailando...");
+                                        ultimaAccion = "Bailar";
                                         //Toast.makeText(getApplicationContext(),"Retroceder fue enviado con exito", Toast.LENGTH_LONG).show();
                                     }else{
                                         Toast.makeText(getApplicationContext(),"No fue enviada la acción correctamente",
@@ -473,11 +487,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public void enviar(View view){
-        this.doInBackground("http://192.168.1.131:8000/o/token/?","password","kozak","totodiletux999","nl1hQDOjoTodris2ooxifflEATQSOk0lU5cCO2mV","u0JOw7C0GWWXyS8MCmeIL9r7vpuw0OzkkVjfByyvq6FCKh3XSIW5MpB3WjKsOkuA9nssmnRy7BjHTY2oij69zRYh4FW15nBXQVlKiklrFVoLo8hBRKpvNEgd09mz3LXz");
-
+        this.doInBackground("http://tux777.pythonanywhere.com/o/token/?","password","kozak",
+                "totodiletux999","nl1hQDOjoTodris2ooxifflEATQSOk0lU5cCO2mV",
+                "u0JOw7C0GWWXyS8MCmeIL9r7vpuw0OzkkVjfByyvq6FCKh3XSIW5MpB3WjKsOkuA9nssmnRy7BjHTY2oij69zRYh4FW15nBXQVlKiklrFVoLo8hBRKpvNEgd09mz3LXz");
     }
-
-
 
     protected String doInBackground(String... params) {
 
@@ -537,6 +550,16 @@ public class MainActivity extends AppCompatActivity {
             Log.i("Result", "SLEEP ERROR");
         }
         return null;
+    }
+
+
+    public void loguearaa(View v){
+        String usuario = getIntent().getStringExtra("usuario");
+        Intent registroIntent = new Intent(getApplicationContext(),registro.class);
+        registroIntent.putExtra("usuario", usuario);
+        registroIntent.putExtra("ultimaAccion", ultimaAccion);
+        startActivity(registroIntent);
+        finish();
     }
 
 }
