@@ -79,8 +79,9 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(JSONArray response) {
                                 try {
-                                    String valorTemperatura = response.getJSONObject(0).getString("temperatura");
-                                    String valorHumedad = response.getJSONObject(0).getString("humedad");
+                                    System.out.println(response.length());
+                                    String valorTemperatura = response.getJSONObject(response.length()-1).getString("temperatura");
+                                    String valorHumedad = response.getJSONObject(response.length()-1).getString("humedad");
                                     //Log.i(valor,valor);
                                     if(valorTemperatura.equals("") && valorHumedad.equals("")){
                                         //wasa;
