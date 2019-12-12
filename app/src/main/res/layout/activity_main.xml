@@ -13,194 +13,65 @@
         android:scaleType="centerCrop"
         android:src="@drawable/f2" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#CE000000"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:gravity="center"
-            android:paddingTop="20dp"
-            android:paddingBottom="15dp"
-            android:text="CONTROL"
-            android:textColor="#FFFFFF"
-            android:textSize="30sp"
-            android:textStyle="bold|italic" />
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="#00000000"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#00000000"
-                android:gravity="center"
-                android:paddingRight="10dp"
-                android:text="TEMPERATURA"
-                android:textColor="@android:color/background_light"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/txtUsuario"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/input2"
-                android:ems="5"
-                android:gravity="center"
-                android:inputType="textPersonName"
-                android:paddingTop="3dp"
-                android:paddingBottom="3dp"
-                android:text="-------"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="#00000000"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingTop="10dp">
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-
-                android:background="#00000000"
-                android:gravity="center"
-                android:paddingRight="10dp"
-                android:text="HUMEDAD"
-                android:textColor="@android:color/background_light"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/txtClave"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_marginLeft="15dp"
-                android:background="@drawable/input2"
-                android:ems="5"
-                android:gravity="center"
-                android:inputType="textPersonName"
-                android:paddingTop="3dp"
-                android:paddingBottom="3dp"
-                android:text="-------"
-                android:textColor="#FC000000"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-
-        <Button
-            android:id="@+id/btnSalir"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:onClick="loguearaa"
-            android:text="Registrar" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="#00000000"
+            android:layout_height="match_parent"
+            android:background="#CE000000"
             android:gravity="center"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:paddingTop="20dp"
+                android:paddingBottom="15dp"
+                android:text="CONTROL"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp"
+                android:textStyle="bold|italic" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="#00000000"
-
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btnPararse"
+
+                <TextView
+                    android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/press_button2"
-                    android:drawableStart="@drawable/up"
+                    android:background="#00000000"
                     android:gravity="center"
-                    android:onClick="accionParar"
-                    android:paddingLeft="28dp" />
+                    android:paddingRight="10dp"
+                    android:text="TEMPERATURA"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="18sp" />
 
-                <Button
-                    android:id="@+id/btnAvanzar"
+                <TextView
+                    android:id="@+id/txtUsuario"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/press_button"
-                    android:drawableLeft="@drawable/a2"
-                    android:onClick="accionAvanzar"
-                    android:padding="30dp"
+                    android:background="@drawable/input2"
+                    android:ems="5"
+                    android:gravity="center"
+                    android:inputType="textPersonName"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
+                    android:text="-------"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-                    />
-
-
-                <Button
-                    android:id="@+id/btnSentarse"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/press_button2"
-                    android:drawableLeft="@drawable/sit"
-                    android:onClick="accionSentar"
-                    android:paddingLeft="28dp" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:background="#00000000"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btnGirarIzquierda"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="40dp"
-                    android:background="@drawable/press_button"
-                    android:drawableLeft="@drawable/a1"
-                    android:onClick="accionGirarIzquierda"
-                    android:padding="30dp" />
-
-
-                <Button
-                    android:id="@+id/btnGirarDerecha"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:background="@drawable/press_button"
-                    android:drawableLeft="@drawable/a3"
-                    android:onClick="accionGirarDerecha"
-                    android:padding="30dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -209,45 +80,180 @@
                 android:layout_marginBottom="10dp"
                 android:background="#00000000"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
 
-                <Button
-                    android:id="@+id/btnSaludar"
+                <TextView
+                    android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/press_button2"
-                    android:drawableStart="@drawable/h1"
-                    android:onClick="accionSaludar"
+                    android:layout_marginLeft="30dp"
 
-                    android:paddingLeft="28dp" />
+                    android:background="#00000000"
+                    android:gravity="center"
+                    android:paddingRight="10dp"
+                    android:text="HUMEDAD"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="18sp" />
 
-                <Button
-                    android:id="@+id/btnRetroceder"
+                <TextView
+                    android:id="@+id/txtClave"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/press_button"
-                    android:drawableLeft="@drawable/a4"
-                    android:onClick="accionRetroceder"
-                    android:padding="30dp" />
 
-                <Button
-                    android:id="@+id/btnBailar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/press_button2"
-                    android:drawableLeft="@drawable/dan"
-                    android:onClick="accionBailar"
-                    android:paddingLeft="28dp" />
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/input2"
+                    android:ems="5"
+                    android:gravity="center"
+                    android:inputType="textPersonName"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
+                    android:text="-------"
+                    android:textColor="#FC000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
             </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btnSalir"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:onClick="loguearaa"
+                android:text="Registrar" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="#00000000"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:background="#00000000"
+
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnPararse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/press_button2"
+                        android:drawableStart="@drawable/up"
+                        android:gravity="center"
+                        android:onClick="accionParar"
+                        android:paddingLeft="28dp" />
+
+                    <Button
+                        android:id="@+id/btnAvanzar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/press_button"
+                        android:drawableLeft="@drawable/a2"
+                        android:onClick="accionAvanzar"
+                        android:padding="30dp"
+
+                        />
+
+
+                    <Button
+                        android:id="@+id/btnSentarse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:background="@drawable/press_button2"
+                        android:drawableLeft="@drawable/sit"
+                        android:onClick="accionSentar"
+                        android:paddingLeft="28dp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:background="#00000000"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnGirarIzquierda"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="40dp"
+                        android:background="@drawable/press_button"
+                        android:drawableLeft="@drawable/a1"
+                        android:onClick="accionGirarIzquierda"
+                        android:padding="30dp" />
+
+
+                    <Button
+                        android:id="@+id/btnGirarDerecha"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:background="@drawable/press_button"
+                        android:drawableLeft="@drawable/a3"
+                        android:onClick="accionGirarDerecha"
+                        android:padding="30dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:background="#00000000"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnSaludar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/press_button2"
+                        android:drawableStart="@drawable/h1"
+                        android:onClick="accionSaludar"
+
+                        android:paddingLeft="28dp" />
+
+                    <Button
+                        android:id="@+id/btnRetroceder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/press_button"
+                        android:drawableLeft="@drawable/a4"
+                        android:onClick="accionRetroceder"
+                        android:padding="30dp" />
+
+                    <Button
+                        android:id="@+id/btnBailar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:background="@drawable/press_button2"
+                        android:drawableLeft="@drawable/dan"
+                        android:onClick="accionBailar"
+                        android:paddingLeft="28dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/lblEstado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Estado: Estado Inicial"
+                android:textSize="24sp" />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/lblEstado"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Estado: Estado Inicial" />
-    </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

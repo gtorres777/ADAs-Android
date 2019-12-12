@@ -97,9 +97,7 @@ public class MainActivity extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(),
-                                "Compruebe que tiene acceso a internet",
-                                Toast.LENGTH_LONG).show();
+                        lblEstado.setText("Compruebe que tiene acceso a internet - mostrarDatos");
                     }
                 });
                 queue.add(stringRequest);
@@ -190,9 +188,7 @@ public class MainActivity extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(),
-                                "Compruebe que tiene acceso a internet",
-                                Toast.LENGTH_LONG).show();
+                        lblEstado.setText("Compruebe que tiene acceso a internet");
                     }
                 });
                 queue.add(stringRequest);
@@ -231,9 +227,7 @@ public class MainActivity extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(),
-                                "Compruebe que tiene acceso a internet",
-                                Toast.LENGTH_LONG).show();
+                        lblEstado.setText("Compruebe que tiene acceso a internet");
                     }
                 });
                 queue.add(stringRequest);
@@ -272,9 +266,7 @@ public class MainActivity extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(),
-                                "Compruebe que tiene acceso a internet",
-                                Toast.LENGTH_LONG).show();
+                        lblEstado.setText("Compruebe que tiene acceso a internet");
                     }
                 });
                 queue.add(stringRequest);
@@ -313,9 +305,7 @@ public class MainActivity extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(),
-                                "Compruebe que tiene acceso a internet",
-                                Toast.LENGTH_LONG).show();
+                        lblEstado.setText("Compruebe que tiene acceso a internet");
                     }
                 });
                 queue.add(stringRequest);
@@ -354,9 +344,7 @@ public class MainActivity extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(),
-                                "Compruebe que tiene acceso a internet",
-                                Toast.LENGTH_LONG).show();
+                        lblEstado.setText("Compruebe que tiene acceso a internet");
                     }
                 });
                 queue.add(stringRequest);
@@ -395,9 +383,7 @@ public class MainActivity extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(),
-                                "Compruebe que tiene acceso a internet",
-                                Toast.LENGTH_LONG).show();
+                        lblEstado.setText("Compruebe que tiene acceso a internet");
                     }
                 });
                 queue.add(stringRequest);
@@ -436,9 +422,7 @@ public class MainActivity extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(),
-                                "Compruebe que tiene acceso a internet",
-                                Toast.LENGTH_LONG).show();
+                        lblEstado.setText("Compruebe que tiene acceso a internet");
                     }
                 });
                 queue.add(stringRequest);
@@ -477,9 +461,7 @@ public class MainActivity extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(),
-                                "Compruebe que tiene acceso a internet",
-                                Toast.LENGTH_LONG).show();
+                        lblEstado.setText("Compruebe que tiene acceso a internet");
                     }
                 });
                 queue.add(stringRequest);
