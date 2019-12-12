@@ -17,6 +17,15 @@
         android:background="#A6000000"
         android:orientation="vertical">
 
+        <Button
+            android:id="@+id/btnIngresarwebview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="ingresarMain2"
+            android:text="Ingresar"
+            android:textSize="30sp"
+            android:visibility="visible" />
+
         <WebView
             android:id="@+id/web_1"
             android:layout_width="match_parent"
