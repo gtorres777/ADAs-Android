@@ -38,7 +38,7 @@
             android:background="@drawable/press_button"
             android:elevation="5dp"
             android:onClick="loguear"
-            android:text="loguearse"
+            android:text="INGRESAR CON DJANGO"
             android:textColor="#fff"
             android:textSize="16sp" />
 
