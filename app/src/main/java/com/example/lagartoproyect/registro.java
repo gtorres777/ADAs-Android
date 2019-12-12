@@ -51,6 +51,7 @@ public class registro extends AppCompatActivity {
                     String descripcion = registroDescripcion.getText().toString();
                     String nuevaDecripcion = "";
                     if(descripcion.equals("")){
+                    }else{
                         String chara;
                         for (int i = 0; i < descripcion.length(); i++){
                             chara = descripcion.charAt(i) + "";
@@ -59,7 +60,6 @@ public class registro extends AppCompatActivity {
                             }else{
                                 nuevaDecripcion = nuevaDecripcion + chara;
                             }
-
                         }
                     }
                     System.out.println(nuevaDecripcion);
