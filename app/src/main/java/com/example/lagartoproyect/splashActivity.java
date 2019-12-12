@@ -11,7 +11,7 @@ public class splashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intent = new Intent(this, webview.class);
+        Intent intent = new Intent(this, login.class);
         startActivity(intent);
         finish();
     }
