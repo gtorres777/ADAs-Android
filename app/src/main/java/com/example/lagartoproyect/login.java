@@ -18,12 +18,11 @@ public class login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        loginUsuario = findViewById(R.id.loginUsuario);
+
     }
     public void loguear(View v){
-        String Usuariolbl = loginUsuario.getText().toString();
-        Intent llamar = new Intent(getApplicationContext(),MainActivity.class);
-        llamar.putExtra("usuario", Usuariolbl);
+
+        Intent llamar = new Intent(getApplicationContext(),webview.class);
         startActivity(llamar);
         finish();
     }

@@ -30,11 +30,6 @@
             android:id="@+id/web_1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="20dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="40dp"
             tools:layout_editor_absoluteX="50dp"
             tools:layout_editor_absoluteY="69dp" />
     </LinearLayout>
