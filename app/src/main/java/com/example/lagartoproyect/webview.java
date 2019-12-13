@@ -62,7 +62,7 @@ public class webview extends AppCompatActivity {
         aea.getSettings().setBuiltInZoomControls(true);
         aea.loadUrl("http://tux777.pythonanywhere.com/o/authorize/?response_type=code&client_id" +
                         "=d0vZvJPYejBKMRO1brP9AmVixfyzD3BBL6ySlj5k&redirect_uri=http%3A%2F%2Ftux777." +
-                        "pythonanywhere.com%2Fcode%2F&scope=write&state=1234zyx&code_challenge=" +
+                        "pythonanywhere.com%2Fcode%2F&scope=read%20write&state=1234zyx&code_challenge=" +
                         "47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU&code_challenge_method=S256");
 
                 aea.setWebViewClient(new WebViewClient(){
@@ -224,6 +224,7 @@ public class webview extends AppCompatActivity {
                         params.put("client_id","d0vZvJPYejBKMRO1brP9AmVixfyzD3BBL6ySlj5k");
                         params.put("code_verifier","password");
                         params.put("client_secret","W47KxYKFu5SV27crYXWrfqmpczv22NrNdoEmvLtcBvdCwhGoqkCXpe1hOpcczCt3rdJkl8JPnWoOlk3XDkl9sGN1nURipB54U3BY9c4hc51od5NijBoRpD8xMzmmaTne");
+                        params.put("scope", "read write");
                         return params;
                     }
                     @Override

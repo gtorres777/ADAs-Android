@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -18,9 +19,13 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MostrarDatos extends AppCompatActivity {
 
     TextView lblUsuario, lblTempP, lblHumP, lblPeriodo, lblAccion, lblDescripcion, lblFecha, lblHora;
+    String token="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,8 @@ public class MostrarDatos extends AppCompatActivity {
         lblHora = findViewById(R.id.lblHora);
 
         mostrarDatosReportes();
+        token = getIntent().getStringExtra("token");
+        System.out.println("token" + token + "------------------------------------------------------------------------------------------------");
     }
 
     public void mostrarDatosReportes(){
@@ -82,7 +89,16 @@ public class MostrarDatos extends AppCompatActivity {
                                 "Compruebe que tiene acceso a internet",
                                 Toast.LENGTH_LONG).show();
                     }
-                });
+                })
+                {
+                    @Override
+                    public Map getHeaders() throws AuthFailureError {
+                        HashMap headers = new HashMap();
+                        headers.put("Authorization", "Bearer "+token);
+                        return headers;
+                    }
+
+                };
                 queue.add(stringRequest);
             };
         });

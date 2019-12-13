@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -31,6 +32,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     Handler handler = new Handler();
     final int TIEMPO = 1100;
     String ultimaAccion = "Sentarse";
+    String token = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         lblEstado = findViewById(R.id.lblEstado);
 
         mostrarDatosHandler();
+        token = getIntent().getStringExtra("token");
+        System.out.println(token + "---------------------------------------------------------------");
     }
 
     public void mostrarDatosHandler() {
@@ -107,55 +113,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Peticion de post actualizar datos en 0 y 1     http://192.168.1.12:8000/token/?temperatura=200&humedad=100
-    public void enviarDatos(View v){
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                String dato1 = txtUsuario.getText().toString().trim();
-                String dato2 = txtClave.getText().toString().trim();
-                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                //String url ="http://192.168.1.12:8000/datos";
-                String url ="http://tux777.pythonanywhere.com/token/?";
-                url = url + "temperatura=" + dato1 + "&humedad=" + dato2;
-
-                JsonArrayRequest stringRequest = new JsonArrayRequest(url,
-                        new Response.Listener<JSONArray>() {
-                            @Override
-                            public void onResponse(JSONArray response) {
-                                try {
-                                    String valor = response.getJSONObject(0).getString("Mensaje");
-                                    Log.i(valor,valor);
-                                    if(valor.equals("Update Success")){
-
-                                        //Intent llamar = new Intent(getApplicationContext(),MostrarDatos.class);
-                                        //startActivity(llamar);
-                                        //finish();
-                                        lblEstado.setText("subiendo...");
-                                        Toast.makeText(getApplicationContext(),"Su mensaje fue enviado con exito",
-                                                Toast.LENGTH_LONG).show();
-
-                                    }else{
-                                        Toast.makeText(getApplicationContext(),"Credenciales invalidas",
-                                                Toast.LENGTH_LONG).show();
-                                    }
-                                } catch (JSONException e) {
-                                    Toast.makeText(getApplicationContext(),
-                                            "Error en la data recibida",
-                                            Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(),
-                                "Compruebe que tiene acceso a internet",
-                                Toast.LENGTH_LONG).show();
-                    }
-                });
-                queue.add(stringRequest);
-            };
-        });
-    }
     //Fin del codigo antiguo de juan y edagardo
 
     // Funcion para que el robot se pare
@@ -175,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
                                     if(valor.equals("Update Success")){
                                         lblEstado.setText("Estado: Parado");
                                         ultimaAccion = "Pararse";
-                                        //Toast.makeText(getApplicationContext(),"Avanzar fue enviado con exito", Toast.LENGTH_LONG).show();
                                     }else{
                                         Toast.makeText(getApplicationContext(),"No fue enviada la acción correctamente",
                                                 Toast.LENGTH_LONG).show();
@@ -191,7 +147,15 @@ public class MainActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         lblEstado.setText("Compruebe que tiene acceso a internet");
                     }
-                });
+                })
+                {
+                    @Override
+                    public Map getHeaders() throws AuthFailureError {
+                        HashMap headers = new HashMap();
+                        headers.put("Authorization", "Bearer "+token);
+                        return headers;
+                    }
+                };
                 queue.add(stringRequest);
             };
         });
@@ -230,7 +194,16 @@ public class MainActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         lblEstado.setText("Compruebe que tiene acceso a internet");
                     }
-                });
+
+                })
+                {
+                    @Override
+                    public Map getHeaders() throws AuthFailureError {
+                        HashMap headers = new HashMap();
+                        headers.put("Authorization", "Bearer "+token);
+                        return headers;
+                    }
+                };
                 queue.add(stringRequest);
             };
         });
@@ -269,7 +242,15 @@ public class MainActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         lblEstado.setText("Compruebe que tiene acceso a internet");
                     }
-                });
+                })
+                {
+                    @Override
+                    public Map getHeaders() throws AuthFailureError {
+                        HashMap headers = new HashMap();
+                        headers.put("Authorization", "Bearer "+token);
+                        return headers;
+                    }
+                };
                 queue.add(stringRequest);
             };
         });
@@ -308,7 +289,15 @@ public class MainActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         lblEstado.setText("Compruebe que tiene acceso a internet");
                     }
-                });
+                })
+                {
+                    @Override
+                    public Map getHeaders() throws AuthFailureError {
+                        HashMap headers = new HashMap();
+                        headers.put("Authorization", "Bearer "+token);
+                        return headers;
+                    }
+                };
                 queue.add(stringRequest);
             };
         });
@@ -347,7 +336,15 @@ public class MainActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         lblEstado.setText("Compruebe que tiene acceso a internet");
                     }
-                });
+                })
+                {
+                    @Override
+                    public Map getHeaders() throws AuthFailureError {
+                        HashMap headers = new HashMap();
+                        headers.put("Authorization", "Bearer "+token);
+                        return headers;
+                    }
+                };
                 queue.add(stringRequest);
             };
         });
@@ -386,7 +383,15 @@ public class MainActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         lblEstado.setText("Compruebe que tiene acceso a internet");
                     }
-                });
+                })
+                {
+                    @Override
+                    public Map getHeaders() throws AuthFailureError {
+                        HashMap headers = new HashMap();
+                        headers.put("Authorization", "Bearer "+token);
+                        return headers;
+                    }
+                };
                 queue.add(stringRequest);
             };
         });
@@ -398,13 +403,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url ="http://tux777.pythonanywhere.com/accion/?accion=saludar";
+                String url ="http://tux777.pythonanywhere.com/accion_vip/?accion=saludar";
                 JsonArrayRequest stringRequest = new JsonArrayRequest(url,
                         new Response.Listener<JSONArray>() {
                             @Override
                             public void onResponse(JSONArray response) {
                                 try {
-                                    String valor = response.getJSONObject(0).getString("Mensaje");
+                                    String valor = response.getJSONObject(0).getString("Mensaje VIP");
                                     Log.i(valor,valor);
                                     if(valor.equals("Update Success")){
                                         lblEstado.setText("Estado: Saludando...");
@@ -425,7 +430,15 @@ public class MainActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         lblEstado.setText("Compruebe que tiene acceso a internet");
                     }
-                });
+                })
+                {
+                    @Override
+                    public Map getHeaders() throws AuthFailureError {
+                        HashMap headers = new HashMap();
+                        headers.put("Authorization", "Bearer "+token);
+                        return headers;
+                    }
+                };
                 queue.add(stringRequest);
             };
         });
@@ -437,13 +450,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url ="http://tux777.pythonanywhere.com/accion/?accion=bailar";
+                String url ="http://tux777.pythonanywhere.com/accion_vip/?accion=bailar";
                 JsonArrayRequest stringRequest = new JsonArrayRequest(url,
                         new Response.Listener<JSONArray>() {
                             @Override
                             public void onResponse(JSONArray response) {
                                 try {
-                                    String valor = response.getJSONObject(0).getString("Mensaje");
+                                    String valor = response.getJSONObject(0).getString("Mensaje VIP");
                                     Log.i(valor,valor);
                                     if(valor.equals("Update Success")){
                                         lblEstado.setText("Estado: Bailando...");
@@ -464,25 +477,35 @@ public class MainActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         lblEstado.setText("Compruebe que tiene acceso a internet");
                     }
-                });
+                })
+                {
+                        @Override
+                        public Map getHeaders() throws AuthFailureError {
+                        HashMap headers = new HashMap();
+                        headers.put("Authorization", "Bearer "+token);
+                        return headers;
+                    }
+
+                };
                 queue.add(stringRequest);
             };
         });
     }
     public void enviar(View view){
-        this.doInBackground("http://tux777.pythonanywhere.com/o/token/?","password","kozak",
-                "totodiletux999","nl1hQDOjoTodris2ooxifflEATQSOk0lU5cCO2mV",
-                "u0JOw7C0GWWXyS8MCmeIL9r7vpuw0OzkkVjfByyvq6FCKh3XSIW5MpB3WjKsOkuA9nssmnRy7BjHTY2oij69zRYh4FW15nBXQVlKiklrFVoLo8hBRKpvNEgd09mz3LXz");
+        this.doInBackground("http://tux777.pythonanywhere.com/o/token/?","authorization_code","codeaca",
+                "http://tux777.pythonanywhere.com/code/","d0vZvJPYejBKMRO1brP9AmVixfyzD3BBL6ySlj5k",
+                "W47KxYKFu5SV27crYXWrfqmpczv22NrNdoEmvLtcBvdCwhGoqkCXpe1hOpcczCt3rdJkl8JPnWoOlk3XDkl9sGN1nURipB54U3BY9c4hc51od5NijBoRpD8xMzmmaTne","password");
     }
 
     protected String doInBackground(String... params) {
 
         String urlString = params[0];
         String grant_type = params[1];
-        String username = params[2];
-        String password = params[3];
+        String code = params[2];
+        String redirect_uri = params[3];
         String client_id = params[4];
         String client_secret = params[5];
+        String code_verifier = params[6];
         URL url = null;
         InputStream stream = null;
         HttpURLConnection urlConnection = null;
@@ -495,16 +518,19 @@ public class MainActivity extends AppCompatActivity {
             String data = URLEncoder.encode("grant_type", "UTF-8")
                     + "=" + URLEncoder.encode(grant_type, "UTF-8");
 
-            data += "&" + URLEncoder.encode("username", "UTF-8") + "="
-                    + URLEncoder.encode(username, "UTF-8");
+            data += "&" + URLEncoder.encode("code", "UTF-8") + "="
+                    + URLEncoder.encode(code, "UTF-8");
 
-            data += "&" + URLEncoder.encode("password", "UTF-8") + "="
-                    + URLEncoder.encode(password, "UTF-8");
+            data += "&" + URLEncoder.encode("redirect_uri", "UTF-8") + "="
+                    + URLEncoder.encode(redirect_uri, "UTF-8");
 
             data += "&" + URLEncoder.encode("client_id", "UTF-8") + "="
                     + URLEncoder.encode(client_id, "UTF-8");
 
             data += "&" + URLEncoder.encode("client_secret", "UTF-8") + "="
+                    + URLEncoder.encode(client_secret, "UTF-8");
+
+            data += "&" + URLEncoder.encode("code_verifier", "UTF-8") + "="
                     + URLEncoder.encode(client_secret, "UTF-8");
 
             urlConnection.connect();
@@ -537,10 +563,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void loguearaa(View v){
-        String usuario = getIntent().getStringExtra("usuario");
+        String usuario = "tux777";
         Intent registroIntent = new Intent(getApplicationContext(),registro.class);
         registroIntent.putExtra("usuario", usuario);
         registroIntent.putExtra("ultimaAccion", ultimaAccion);
+        registroIntent.putExtra("token",token);
         startActivity(registroIntent);
         finish();
     }

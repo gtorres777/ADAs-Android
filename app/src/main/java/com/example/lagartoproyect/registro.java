@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -20,10 +21,14 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class registro extends AppCompatActivity {
 
     TextView registroUsuarioName, registroAccion;
     EditText registroDescripcion, registroPeriodo;
+    String token="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,9 @@ public class registro extends AppCompatActivity {
 
         registroUsuarioName.setText(getIntent().getStringExtra("usuario"));
         registroAccion.setText(getIntent().getStringExtra("ultimaAccion"));
+
+        token = getIntent().getStringExtra("token");
+        System.out.println("token" + token + "------------------------------------------------------------------------------------------------");
     }
 
 
@@ -77,6 +85,7 @@ public class registro extends AppCompatActivity {
                                         Log.i(valor, valor);
                                         if (valor.equals("Add Success")) {
                                             Intent llamar = new Intent(getApplicationContext(), MostrarDatos.class);
+                                            llamar.putExtra("token",token);
                                             startActivity(llamar);
                                             finish();
                                         } else {
@@ -96,7 +105,16 @@ public class registro extends AppCompatActivity {
                                     "Compruebe que tiene acceso a internet",
                                     Toast.LENGTH_LONG).show();
                         }
-                    });
+                    })
+                    {
+                        @Override
+                        public Map getHeaders() throws AuthFailureError {
+                            HashMap headers = new HashMap();
+                            headers.put("Authorization", "Bearer "+token);
+                            return headers;
+                        }
+
+                    };
                     queue.add(stringRequest);
                 }
 
